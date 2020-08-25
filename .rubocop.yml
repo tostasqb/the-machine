@@ -1,0 +1,56 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'Gemfile'
+    - 'log/**/*'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'config/**/*'
+
+# Commonly used screens these days easily fit more than 80 characters.
+Layout/LineLength:
+  Max: 100
+  Exclude:
+    - 'spec/**/**'
+Metrics/ClassLength:
+  Max: 100
+  Exclude:
+    - 'spec/**/*'
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - 'spec/**/**'
+Metrics/BlockLength:
+  Max: 25
+  Exclude:
+    - 'spec/**/**'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/AutoResourceCleanup:
+  Enabled: true
+# unless can get confusing sometimes
+Style/NegatedIf:
+  Enabled: false
+# Keep consistency in calls of Enumerable methods (p.ex inject vs reduce)
+Style/CollectionMethods:
+  Enabled: true
+Style/MutableConstant:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: false
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+Style/FormatStringToken:
+  Enabled: false
+
+
+Lint/LiteralInInterpolation:
+  AutoCorrect: true
