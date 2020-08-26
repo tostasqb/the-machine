@@ -1,15 +1,73 @@
-// This file is automatically compiled by Webpack, along with any other files
-// present in this directory. You're encouraged to place your actual application logic in
-// a relevant structure within app/javascript and only use these pack files to reference
-// that code so it'll be compiled.
+require('@rails/ujs').start();
+require('jquery');
 
-require("@rails/ujs").start()
-require("@rails/activestorage").start()
+window.app = {
+  total: 0,
+  insertedCoins: [],
+  totalInserted: 0,
+  productValue: 0,
+  productId: 0,
 
+  feedbackToUser: function() {
+    if(app.enoughToSubmit()) {
+      $('#feedback').html('Inserted ' + app.totalInserted.toString() + '<br>Processing, please wait... ');
 
-// Uncomment to copy all static images under ../images to the output folder and reference
-// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
-// or the `imagePath` JavaScript helper below.
-//
-// const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)
+    } else {
+      $('#feedback').text('Inserted ' + app.totalInserted.toString());
+    }
+  },
+
+  enoughToSubmit: function() {
+    app.totalInserted = app.insertedCoins.reduce((a, b) => a + b).toFixed(2);
+    if (app.totalInserted >= app.productValue) {
+      app.submit();
+      return true;
+    }
+    return false;
+  },
+
+  submit: function() {
+    var data = {
+      inserted_coins: app.insertedCoins,
+      product_id: app.productId
+    }
+
+    $.ajax({
+      url: "/submit.json",
+      type: "POST",
+      dataType: "html",
+      data: data,
+      success: function(result) {
+        $('#feedback').html('Thank you for purchasing, your change is the following: <br>' + JSON.parse(result).change.join(', ') + '<br> Please reload to buy again');
+      },
+      error: function(e, data, status, error) {
+        throw "Not able to deliver product";
+      }
+    });
+  }
+}
+
+$(function() {
+  $('.products a').click(function(e) {
+    e.preventDefault();
+
+    $this = $(this);
+
+    $('.products a').removeClass('active');
+    $this.addClass('active');
+
+    $('.wrapper-coins').show();
+
+    app.productId = $this.data('id');
+    app.productValue = parseFloat($this.data('value'));
+  });
+
+  $('.wrapper-coins a').click(function(e) {
+    e.preventDefault();
+
+    var selectedvalue = $(this).data('value');
+    app.insertedCoins.push(parseFloat(selectedvalue));
+
+    app.feedbackToUser();
+  });
+});

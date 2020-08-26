@@ -1,0 +1,25 @@
+<h1>Vending Machine</h1>
+
+<div class="wrapper-products">
+    <h3>1. Select Product</h3>
+    <ul class="products">
+        <% Product.all.each do |product| %>
+        <li>
+            <a href="" data-value="<%=product.price%>" data-id="<%=product.id%>"><%=product.name %>: <%=product.price%>£</a>
+        </li>
+        <% end %>
+    </ul>
+</div>
+
+<div class="wrapper-coins">
+    <h3>2. Insert Coins</h3>
+    <ul class="coins">
+        <% Coin.all.each do |coin| %>
+        <li>
+            <a href="#" data-value="<%==coin.value%>"><%=coin.name %></a>
+        </li>
+        <% end %>
+    </ul>
+</div>
+
+<div id="feedback"></div>
