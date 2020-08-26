@@ -41,7 +41,7 @@ window.app = {
         $('#feedback').html('Thank you for purchasing, your change is the following: <br>' + JSON.parse(result).change.join(', ') + '<br> Please reload to buy again');
       },
       error: function(e, data, status, error) {
-        throw "Not able to deliver product";
+        $('#feedback').html('Unable to process change. <br> Please reload to buy again');
       }
     });
   }

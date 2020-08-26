@@ -3,9 +3,15 @@
 <div class="wrapper-products">
     <h3>1. Select Product</h3>
     <ul class="products">
-        <% Product.all.each do |product| %>
+        <% Product.available.each do |product| %>
         <li>
             <a href="" data-value="<%=product.price%>" data-id="<%=product.id%>"><%=product.name %>: <%=product.price%>£</a>
+        </li>
+        <% end %>
+
+        <% Product.not_available.each do |product| %>
+        <li>
+            <%=product.name %>: <%=product.price%>£ (Out of stock)
         </li>
         <% end %>
     </ul>

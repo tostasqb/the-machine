@@ -21,7 +21,7 @@ class Vending
       product.quantity -= 1
       product.quantity_sold += 1
 
-      product.save
+      product.save!
     end
 
     def calculate_change(coins_inserted, product_id)

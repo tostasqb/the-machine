@@ -1,24 +1,17 @@
-# README
+# Getting started
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+-   clone
+-   `rake db:create db:migrate`
+-   `rails s # in one terminal tab`
+-   `bin/webpack-dev-server # in another terminal tab`
 
-Things you may want to cover:
+# Tests
 
-* Ruby version
+Run `rspec`. A whole lot more testing is needed.
 
-* System dependencies
+# Next steps
 
-* Configuration
+So much more can be done, it's really easy to get hang up on frontend. A couple could be:
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+-   Testing the lib/vending file more, possibly refactoring
+-   Algorithm for an improved change
